@@ -1,221 +1,458 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<title>Monszyn - Profil Siłownia</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monszyn - Profil</title>
+    <style>
+        :root {
+            --green: #00ff66;
+            --green-dark: #0c0c0c;
+            --green-card: rgba(255,255,255,0.05);
+            --blue: #1f5fff;
+            --blue-light: #f5f9ff;
+            --yellow: #ffd400;
+            --yellow-light: #fff7bf;
+        }
 
-<style>
-html {
-    scroll-behavior: smooth;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: radial-gradient(circle at top, #1a1a1a, #0a0a0a);
-    color: #fff;
-}
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle at top, #1b1b1b, #090909);
+            color: #fff;
+        }
 
-/* HEADER */
-header {
-    text-align: center;
-    padding: 40px;
-    background: #000;
-    box-shadow: 0 0 25px #0f0;
-}
+        header {
+            text-align: center;
+            padding: 48px 20px;
+            background: linear-gradient(135deg, #000, #111);
+            box-shadow: 0 0 25px var(--green);
+            position: relative;
+            overflow: hidden;
+        }
 
-h1 {
-    font-size: 50px;
-    color: #0f0;
-    letter-spacing: 2px;
-}
+        header::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(0,255,102,0.12), transparent 55%);
+            pointer-events: none;
+        }
 
-/* NAV */
-nav {
-    position: sticky;
-    top: 0;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(10px);
-    text-align: center;
-    padding: 12px;
-    z-index: 100;
-    border-bottom: 1px solid #0f0;
-}
+        h1 {
+            font-size: clamp(36px, 6vw, 56px);
+            margin: 0;
+            color: var(--green);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
 
-nav a {
-    color: #fff;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
+        header p {
+            margin: 12px 0 0;
+            font-size: 18px;
+            color: #ddd;
+            position: relative;
+            z-index: 1;
+        }
 
-nav a:hover {
-    color: #0f0;
-    transform: scale(1.1);
-}
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,255,102,0.35);
+        }
 
-/* CONTAINER */
-.container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 20px;
-}
+        .nav-wrap {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 12px 18px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
 
-/* CARDS */
-.card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(0,255,0,0.2);
-    margin: 20px 0;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 0 15px rgba(0,255,0,0.2);
-    transition: 0.3s;
-    backdrop-filter: blur(8px);
-}
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: 0.25s ease;
+        }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 25px #0f0;
-}
+        nav a:hover {
+            transform: translateY(-2px);
+            color: var(--green);
+            border-color: rgba(0,255,102,0.45);
+            box-shadow: 0 0 14px rgba(0,255,102,0.18);
+        }
 
-h2 {
-    color: #0f0;
-}
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 24px 16px 40px;
+        }
 
-/* STATS */
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-}
+        .intro {
+            background: linear-gradient(135deg, rgba(0,255,102,0.10), rgba(255,255,255,0.04));
+            border: 1px solid rgba(0,255,102,0.18);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 22px;
+            box-shadow: 0 0 18px rgba(0,255,102,0.08);
+        }
 
-.stat {
-    background: rgba(0,0,0,0.7);
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    border: 1px solid #0f0;
-}
+        .intro h2 {
+            margin: 0 0 8px;
+            color: var(--green);
+        }
 
-/* FOOTBALL */
-.football {
-    background: linear-gradient(135deg, #0044ff, #ffffff);
-    color: #000;
-}
+        .intro p {
+            margin: 0;
+            color: #ddd;
+            line-height: 1.6;
+        }
 
-.football h2 {
-    color: #0033cc;
-}
+        .card {
+            background: var(--green-card);
+            border: 1px solid rgba(0,255,102,0.16);
+            margin: 20px 0;
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 0 16px rgba(0,255,102,0.12);
+            transition: 0.28s ease;
+            backdrop-filter: blur(8px);
+        }
 
-/* CHURCH */
-.church {
-    background: linear-gradient(135deg, #ffd700, #fff6b0);
-    color: #000;
-}
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 26px rgba(0,255,102,0.28);
+        }
 
-.church h2 {
-    color: #b38f00;
-}
+        .card h2 {
+            margin-top: 0;
+            color: var(--green);
+            font-size: 28px;
+        }
 
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #000;
-    margin-top: 40px;
-    border-top: 1px solid #0f0;
-}
-</style>
+        .card h3 {
+            color: inherit;
+            margin-top: 10px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+
+        .stat {
+            background: rgba(0,0,0,0.62);
+            padding: 16px;
+            border-radius: 14px;
+            text-align: center;
+            border: 1px solid rgba(0,255,102,0.35);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .info-list p {
+            margin: 10px 0;
+            line-height: 1.55;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 9px 14px;
+            border-radius: 999px;
+            font-weight: bold;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.10);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 13px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: inherit;
+        }
+
+        .football {
+            background: linear-gradient(135deg, #0b43ff, #f7fbff);
+            color: #07121f;
+            border: 1px solid rgba(255,255,255,0.55);
+        }
+
+        .football h2, .football h3 {
+            color: #0b43ff;
+        }
+
+        .football .pill, .football .stat {
+            background: rgba(11,67,255,0.08);
+            border-color: rgba(11,67,255,0.18);
+        }
+
+        .church {
+            background: linear-gradient(135deg, #ffd900, #fff7bf);
+            color: #221a00;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .church h2, .church h3 {
+            color: #9a7600;
+        }
+
+        .church .pill, .church .stat {
+            background: rgba(255,215,0,0.20);
+            border-color: rgba(154,118,0,0.18);
+        }
+
+        a.external {
+            color: inherit;
+            font-weight: bold;
+        }
+
+        a.external:hover {
+            opacity: 0.85;
+        }
+
+        iframe {
+            border: 0;
+            border-radius: 14px;
+            box-shadow: 0 0 16px rgba(0,255,102,0.12);
+        }
+
+        footer {
+            text-align: center;
+            padding: 22px;
+            background: #000;
+            margin-top: 42px;
+            border-top: 1px solid rgba(0,255,102,0.25);
+            color: #ddd;
+        }
+
+        @media (max-width: 760px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            iframe {
+                height: 260px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
 <header>
     <h1>Monszyn 💪</h1>
-    <p>Siłownia • Piłka • Ministrantura</p>
+    <p>Siłownia • Piłka nożna • Ministrantura</p>
 </header>
 
 <nav>
-    <a href="#silownia">Siłownia</a>
-    <a href="#pilka">Piłka nożna</a>
-    <a href="#kosciol">Kościół</a>
+    <div class="nav-wrap">
+        <a href="#silownia">Siłownia</a>
+        <a href="#pilka">Piłka nożna</a>
+        <a href="#kosciol">Kościół</a>
+        <a href="#sociale">Social Media</a>
+        <a href="#motywacja">Motywacja</a>
+    </div>
 </nav>
 
 <div class="container">
 
-<!-- SIŁOWNIA (bez zmian) -->
-<section id="silownia">
-
-<div class="card">
-    <h2>📌 Podstawowe info</h2>
-    <p><b>Imię:</b> Szymon</p>
-    <p><b>Ksywa:</b> Monszyn</p>
-    <p><b>Status:</b> Zajęty</p>
-    <p><b>Wiek:</b> Nastolatek</p>
-    <p><b>Wzrost:</b> 190 cm</p>
-    <p><b>Waga:</b> 98 kg</p>
-    <p><b>Szkoła:</b> Elektron Jelenia Góra</p>
-    <p><b>Kierunek:</b> Technik artysta</p>
-</div>
-
-<div class="card">
-    <h2>🏋️ Osiągi siłowe</h2>
-    <div class="stats">
-        <div class="stat">Ława: <br><b>110 kg</b></div>
-        <div class="stat">Przysiad: <br><b>200 kg</b></div>
-        <div class="stat">Martwy: <br><b>150 kg</b></div>
-        <div class="stat">Biceps: <br><b>30 kg</b></div>
-        <div class="stat">Suwnica: <br><b>230 kg</b></div>
+    <div class="intro">
+        <h2>Witaj na mojej stronie</h2>
+        <p>To jest moja prywatna strona o mnie, o siłowni, o piłce nożnej i o ministranturze. Każda sekcja ma swój klimat, a całość została zrobiona tak, żeby wyglądała ciekawiej i bardziej nowocześnie.</p>
     </div>
-</div>
 
-<div class="card">
-    <h2>👑 Info specjalne</h2>
-    <p>✔ Forma rośnie cały czas</p>
-    <p>✔ Trening to styl życia</p>
-</div>
+    <section id="silownia">
 
-<div class="card">
-    <h2>🤝 Relacje</h2>
-    <p><b>Najlepszy przyjaciel:</b> Kacper Żurowski</p>
-</div>
+        <div class="card">
+            <div class="section-title">
+                <h2>📌 Podstawowe info</h2>
+                <span class="tag">Siłownia</span>
+            </div>
+            <div class="grid-2 info-list">
+                <div>
+                    <p><b>Imię:</b> Szymon</p>
+                    <p><b>Ksywa:</b> Monszyn</p>
+                    <p><b>Status:</b> Zajęty</p>
+                    <p><b>Wiek:</b> Nastolatek</p>
+                </div>
+                <div>
+                    <p><b>Wzrost:</b> 190 cm</p>
+                    <p><b>Waga:</b> 98 kg</p>
+                    <p><b>Szkoła:</b> Elektron Jelenia Góra</p>
+                    <p><b>Kierunek:</b> Technik artysta</p>
+                </div>
+            </div>
+        </div>
 
-</section>
+        <div class="card">
+            <div class="section-title">
+                <h2>🏋️ Osiągi siłowe</h2>
+                <span class="tag">Moc</span>
+            </div>
+            <div class="stats">
+                <div class="stat">Ława:<br><b>110 kg</b></div>
+                <div class="stat">Przysiad:<br><b>200 kg</b></div>
+                <div class="stat">Martwy:<br><b>150 kg</b></div>
+                <div class="stat">Biceps:<br><b>30 kg</b></div>
+                <div class="stat">Suwnica:<br><b>230 kg</b></div>
+            </div>
+        </div>
 
-<!-- PIŁKA NOŻNA -->
-<section id="pilka" class="card football">
+        <div class="card">
+            <div class="section-title">
+                <h2>🍔 Lifestyle</h2>
+                <span class="tag">Codzienność</span>
+            </div>
+            <p><b>Ulubiony posiłek:</b> Burger</p>
+            <p><b>Dostępność:</b> Może ćwiczyć podczas treningów personalnych</p>
+        </div>
 
-<h2>⚽ Piłka nożna</h2>
+        <div class="card">
+            <div class="section-title">
+                <h2>👑 Info specjalne</h2>
+                <span class="tag">Legenda</span>
+            </div>
+            <p>✔ Najważniejsza osoba na siłowni</p>
+            <p>✔ Forma rośnie cały czas</p>
+            <p>✔ Projekt w trakcie rozbudowy</p>
+        </div>
 
-<p><b>Klub:</b> Pogoń Świerzawa</p>
-<p><b>Największy wróg:</b> Orzeł Wojcieszów</p>
-<p><b>Boiskowi przyjaciele:</b> Kacper Żurowski, Bartek Warzocha</p>
-<p><b>Trener:</b> Daniel Czapiewski</p>
+        <div class="card">
+            <div class="section-title">
+                <h2>🤝 Relacje</h2>
+                <span class="tag">Znajomi</span>
+            </div>
+            <p><b>Najlepszy przyjaciel:</b> Kacper Żurowski</p>
+        </div>
 
-<p><b>Ulubione zagranie:</b> mur z Kacprem przy wolnych</p>
-<p><b>Ulubiony klub:</b> Budowlani Wojcieszów</p>
+    </section>
 
-<p>Uwielbiam derby z Orłem Wojcieszów i doping Pogoni.</p>
-<p>Na boisku jestem zawodnikiem, którego każdy kojarzy.</p>
+    <section id="pilka" class="card football">
+        <div class="section-title">
+            <h2>⚽ Piłka nożna</h2>
+            <span class="tag">Niebiesko-biała strefa</span>
+        </div>
 
-</section>
+        <div class="grid-2 info-list">
+            <div>
+                <p><b>Klub:</b> Pogoń Świerzawa</p>
+                <p><b>Największy wróg:</b> Orzeł Wojcieszów</p>
+                <p><b>Boiskowi przyjaciele:</b> Kacper Żurowski, Bartek Warzocha</p>
+                <p><b>Trener:</b> Daniel Czapiewski</p>
+            </div>
+            <div>
+                <p><b>Ulubione zajęcie na boisku:</b> Robienie muru wraz z Kacprem Żurowskim przy rzutach wolnych</p>
+                <p><b>Ulubiony klub piłkarski:</b> Budowlani Wojcieszów</p>
+                <p><b>Co lubię najbardziej:</b> Derby z Orłem Wojcieszów i dopingowanie Pogoni</p>
+                <p><b>Dodatek:</b> Jestem piłkarzem pożądanym przez wszystkie kluby</p>
+            </div>
+        </div>
 
-<!-- KOŚCIÓŁ -->
-<section id="kosciol" class="card church">
+        <div class="pill-row">
+            <span class="pill">Duma z Pogoni</span>
+            <span class="pill">Emocje derbowe</span>
+            <span class="pill">Mur przy wolnych</span>
+            <span class="pill">Boiskowy charakter</span>
+        </div>
 
-<h2>⛪ Ministrant</h2>
+        <h3>O klubie</h3>
+        <p>
+            Pogoń Świerzawa to lokalny klub piłkarski, który daje dużo emocji, rywalizacji i prawdziwego sportowego klimatu.
+            To miejsce, z którym mocno się utożsamiam i które zawsze wspieram z trybun.
+        </p>
+    </section>
 
-<p><b>Ksiądz:</b> Piotrek</p>
-<p><b>Przyjaciele:</b> Kacper Żurowski, Antonio</p>
+    <section id="kosciol" class="card church">
+        <div class="section-title">
+            <h2>⛪ Kościół / Ministrantura</h2>
+            <span class="tag">Żółta strefa</span>
+        </div>
 
-<p><b>Obecność:</b> niedziele i dni obowiązkowe</p>
+        <div class="grid-2 info-list">
+            <div>
+                <p><b>Ksiądz:</b> Piotrek</p>
+                <p><b>Najlepsi przyjaciele ministranci:</b> Kacper Żurowski, Antonio</p>
+                <p><b>Chodzę do kościoła:</b> wyłącznie w niedziele i dni obowiązkowe</p>
+            </div>
+            <div>
+                <p><b>Grzechy:</b> Nie mam żadnych grzechów</p>
+                <p><b>Wyjazdy ministranckie:</b> Wenecja, Mediolan, Gdańsk</p>
+                <p><b>Dodatkowo:</b> czasem zdarzają się grzechy na wyjazdach ministranckich</p>
+            </div>
+        </div>
 
-<p><b>Wyjazdy:</b> Wenecja, Mediolan, Gdańsk</p>
+        <div class="pill-row">
+            <span class="pill">Służba przy ołtarzu</span>
+            <span class="pill">Niedziela i święta</span>
+            <span class="pill">Wyjazdy ministranckie</span>
+            <span class="pill">Przyjaźnie</span>
+        </div>
 
-<p>Służba przy ołtarzu i wyjazdy ministranckie to ważna część życia.</p>
+        <h3>Moja droga</h3>
+        <p>
+            Ministrantura to ważna część mojego życia. Dzięki niej mam fajne wspomnienia, ludzi dookoła i wyjazdy,
+            które zostają w pamięci na długo.
+        </p>
+    </section>
 
-</section>
+    <section id="sociale" class="card">
+        <div class="section-title">
+            <h2>📱 Social Media</h2>
+            <span class="tag">Kontakt</span>
+        </div>
+        <p>👉 TikTok: <a class="external" href="https://www.tiktok.com/@monszyn_" target="_blank">TikTok</a></p>
+        <p>👉 YouTube: <a class="external" href="https://www.youtube.com/@monszyn" target="_blank">YouTube</a></p>
+        <p>👉 Facebook: <a class="external" href="https://www.facebook.com/groups/359985621875587?locale=pl_PL" target="_blank">Facebook</a></p>
+    </section>
+
+    <section id="motywacja" class="card">
+        <div class="section-title">
+            <h2>🎥 Motywacja</h2>
+            <span class="tag">Video</span>
+        </div>
+        <iframe width="100%" height="420" src="https://www.youtube.com/watch?v=L0jIPHnM47c" allowfullscreen></iframe>
+    </section>
 
 </div>
 
@@ -225,3 +462,4 @@ footer {
 
 </body>
 </html>
+
