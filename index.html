@@ -1,284 +1,460 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monszyn - Profil Ultra</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monszyn - Profil</title>
+    <style>
+        :root {
+            --green: #00ff66;
+            --green-2: #14c85a;
+            --dark: #070707;
+            --dark-2: #111;
+            --card: rgba(255,255,255,0.05);
+            --border: rgba(0,255,102,0.18);
+            --blue: #1f5fff;
+            --blue-light: #f4f8ff;
+            --yellow: #ffd400;
+            --yellow-light: #fff7bf;
+        }
 
-<style>
-html {
-    scroll-behavior: smooth;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: radial-gradient(circle at top, #141414, #070707);
-    color: #fff;
-    overflow-x: hidden;
-}
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle at top, #1a1a1a, var(--dark));
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-/* ANIMACJE */
-.fade {
-    opacity: 0;
-    transform: translateY(25px);
-    transition: all 0.8s ease;
-}
+        header {
+            text-align: center;
+            padding: 58px 20px 46px;
+            background: linear-gradient(135deg, #000, #101010);
+            box-shadow: 0 0 28px rgba(0,255,102,0.35);
+            position: relative;
+            overflow: hidden;
+        }
 
-.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+        header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(0,255,102,0.10), transparent 55%);
+            pointer-events: none;
+        }
 
-/* HEADER */
-header {
-    text-align: center;
-    padding: 55px 20px;
-    background: linear-gradient(135deg, #000, #111);
-    box-shadow: 0 0 30px #00ff66;
-}
+        h1 {
+            font-size: clamp(38px, 6vw, 58px);
+            margin: 0;
+            color: var(--green);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
 
-h1 {
-    font-size: 56px;
-    margin: 0;
-    color: #00ff66;
-    letter-spacing: 2px;
-}
+        header p {
+            margin: 12px 0 0;
+            color: #d7d7d7;
+            font-size: 18px;
+            position: relative;
+            z-index: 1;
+        }
 
-header p {
-    margin-top: 10px;
-    color: #ccc;
-}
+        .subline {
+            margin-top: 14px;
+            display: inline-flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
 
-/* NAV */
-nav {
-    position: sticky;
-    top: 0;
-    background: rgba(0,0,0,0.9);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0,255,102,0.25);
-    z-index: 999;
-}
+        .badge {
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: bold;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.10);
+            color: #fff;
+        }
 
-.nav-wrap {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 12px;
-}
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: rgba(0,0,0,0.90);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,255,102,0.22);
+        }
 
-nav a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 16px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.05);
-    transition: 0.3s;
-    font-weight: bold;
-}
+        .nav-wrap {
+            max-width: 1150px;
+            margin: auto;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-nav a:hover {
-    color: #00ff66;
-    transform: scale(1.08);
-}
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.05);
+            transition: 0.25s ease;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
 
-/* CONTAINER */
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
-}
+        nav a:hover {
+            transform: translateY(-2px);
+            color: var(--green);
+            border-color: rgba(0,255,102,0.35);
+            box-shadow: 0 0 16px rgba(0,255,102,0.16);
+        }
 
-/* CARD */
-.card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(0,255,102,0.15);
-    padding: 22px;
-    margin: 20px 0;
-    border-radius: 18px;
-    box-shadow: 0 0 18px rgba(0,255,102,0.12);
-    transition: 0.3s;
-    backdrop-filter: blur(10px);
-}
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 22px 16px 40px;
+        }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 30px rgba(0,255,102,0.25);
-}
+        .intro {
+            background: linear-gradient(135deg, rgba(0,255,102,0.10), rgba(255,255,255,0.04));
+            border: 1px solid rgba(0,255,102,0.16);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 22px;
+            box-shadow: 0 0 18px rgba(0,255,102,0.08);
+        }
 
-h2 {
-    color: #00ff66;
-}
+        .intro h2 {
+            margin: 0 0 8px;
+            color: var(--green);
+        }
 
-/* STATS */
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 14px;
-}
+        .intro p {
+            margin: 0;
+            line-height: 1.65;
+            color: #dfdfdf;
+        }
 
-.stat {
-    background: rgba(0,0,0,0.6);
-    border: 1px solid #00ff66;
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-}
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            margin: 20px 0;
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 0 16px rgba(0,255,102,0.10);
+            transition: 0.28s ease;
+            backdrop-filter: blur(10px);
+        }
 
-/* FOOTBALL */
-.football {
-    background: linear-gradient(135deg, #1f5fff, #f7fbff);
-    color: #081a2b;
-}
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 28px rgba(0,255,102,0.22);
+        }
 
-.football h2 {
-    color: #1f5fff;
-}
+        .card h2 {
+            margin-top: 0;
+            color: var(--green);
+            font-size: 28px;
+        }
 
-/* CHURCH */
-.church {
-    background: linear-gradient(135deg, #ffd400, #fff7bf);
-    color: #2a2200;
-}
+        .card h3 {
+            margin-bottom: 10px;
+            margin-top: 16px;
+        }
 
-.church h2 {
-    color: #9a7600;
-}
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
 
-/* SOCIAL */
-a {
-    color: inherit;
-    font-weight: bold;
-}
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
 
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #000;
-    border-top: 1px solid rgba(0,255,102,0.2);
-    margin-top: 40px;
-}
-</style>
+        .stat {
+            background: rgba(0,0,0,0.62);
+            border: 1px solid rgba(0,255,102,0.34);
+            padding: 15px;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .football {
+            background: linear-gradient(135deg, #1f5fff, #f7fbff);
+            color: #081a2b;
+            border: 1px solid rgba(255,255,255,0.55);
+        }
+
+        .football h2,
+        .football h3 {
+            color: var(--blue);
+        }
+
+        .football .stat,
+        .football .mini-pill {
+            background: rgba(31,95,255,0.08);
+            border-color: rgba(31,95,255,0.20);
+        }
+
+        .church {
+            background: linear-gradient(135deg, #ffd400, #fff7bf);
+            color: #2a2200;
+            border: 1px solid rgba(255,255,255,0.38);
+        }
+
+        .church h2,
+        .church h3 {
+            color: #9a7600;
+        }
+
+        .church .stat,
+        .church .mini-pill {
+            background: rgba(255,212,0,0.18);
+            border-color: rgba(154,118,0,0.18);
+        }
+
+        .mini-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .mini-pill {
+            display: inline-block;
+            padding: 9px 14px;
+            border-radius: 999px;
+            font-weight: bold;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.10);
+        }
+
+        .info p {
+            margin: 10px 0;
+            line-height: 1.55;
+        }
+
+        a {
+            color: inherit;
+            font-weight: bold;
+        }
+
+        a:hover {
+            opacity: 0.85;
+        }
+
+        iframe {
+            width: 100%;
+            height: 420px;
+            border: 0;
+            border-radius: 14px;
+            box-shadow: 0 0 16px rgba(0,255,102,0.10);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #000;
+            margin-top: 40px;
+            border-top: 1px solid rgba(0,255,102,0.20);
+            color: #ddd;
+        }
+
+        @media (max-width: 760px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            iframe {
+                height: 260px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<header class="fade">
+<header>
     <h1>Monszyn 💪</h1>
-    <p>Siłownia • Piłka • Ministrantura • Lifestyle</p>
+    <p>Siłownia • Piłka nożna • Ministrantura • Lifestyle</p>
+    <div class="subline">
+        <span class="badge">Forma rośnie cały czas</span>
+        <span class="badge">Pogoń Świerzawa</span>
+        <span class="badge">Ministrant</span>
+    </div>
 </header>
 
 <nav>
     <div class="nav-wrap">
         <a href="#silownia">Siłownia</a>
-        <a href="#pilka">Piłka</a>
+        <a href="#pilka">Piłka nożna</a>
         <a href="#kosciol">Kościół</a>
-        <a href="#social">Sociale</a>
+        <a href="#sociale">Social Media</a>
+        <a href="#motywacja">Motywacja</a>
     </div>
 </nav>
 
 <div class="container">
 
-<!-- SIŁOWNIA -->
-<section id="silownia" class="fade card">
+    <div class="intro">
+        <h2>Witaj na mojej stronie</h2>
+        <p>
+            To jest moja strona o mnie — o siłowni, piłce nożnej i ministranturze.
+            Zrobiłem ją tak, żeby miała lepszy klimat, była czytelna i miała podział na zakładki,
+            ale dalej zawierała wszystko, co już wcześniej było.
+        </p>
+    </div>
 
-<h2>🏋️ Siłownia</h2>
+    <section id="silownia">
 
-<p><b>Imię:</b> Szymon</p>
-<p><b>Ksywa:</b> Monszyn</p>
-<p><b>Status:</b> Zajęty</p>
-<p><b>Wzrost:</b> 190 cm</p>
-<p><b>Waga:</b> 98 kg</p>
-<p><b>Szkoła:</b> Elektron Jelenia Góra</p>
-<p><b>Kierunek:</b> Technik artysta</p>
+        <div class="card">
+            <h2>📌 Podstawowe info</h2>
+            <div class="grid-2 info">
+                <div>
+                    <p><b>Imię:</b> Szymon</p>
+                    <p><b>Ksywa:</b> Monszyn</p>
+                    <p><b>Status:</b> Zajęty</p>
+                    <p><b>Wiek:</b> Nastolatek</p>
+                </div>
+                <div>
+                    <p><b>Wzrost:</b> 190 cm</p>
+                    <p><b>Waga:</b> 98 kg</p>
+                    <p><b>Szkoła:</b> Elektron Jelenia Góra</p>
+                    <p><b>Kierunek:</b> Technik artysta</p>
+                </div>
+            </div>
+        </div>
 
-<div class="stats">
-    <div class="stat">Ława<br><b>110 kg</b></div>
-    <div class="stat">Przysiad<br><b>200 kg</b></div>
-    <div class="stat">Martwy<br><b>150 kg</b></div>
-    <div class="stat">Biceps<br><b>30 kg</b></div>
-</div>
+        <div class="card">
+            <h2>🏋️ Osiągi siłowe</h2>
+            <div class="stats">
+                <div class="stat">Ława<br><b>110 kg</b></div>
+                <div class="stat">Przysiad<br><b>200 kg</b></div>
+                <div class="stat">Martwy<br><b>150 kg</b></div>
+                <div class="stat">Biceps<br><b>30 kg</b></div>
+                <div class="stat">Suwnica<br><b>230 kg</b></div>
+            </div>
+        </div>
 
-<p><b>Ulubiony posiłek:</b> Burger</p>
-<p><b>Relacja:</b> Kacper Żurowski (best friend)</p>
+        <div class="card">
+            <h2>🍔 Lifestyle</h2>
+            <p><b>Ulubiony posiłek:</b> Burger</p>
+            <p><b>Dostępność:</b> Może ćwiczyć podczas treningów personalnych</p>
+            <p><b>Inne:</b> Nienawidzę karty <b>Miner</b> z Clash Royale i blokuję każdego, kto mi ją wyśle.</p>
+        </div>
 
-</section>
+        <div class="card">
+            <h2>👑 Info specjalne</h2>
+            <p>✔ Najważniejsza osoba na siłowni</p>
+            <p>✔ Forma rośnie cały czas</p>
+            <p>✔ Projekt w trakcie rozbudowy</p>
+        </div>
 
-<!-- PIŁKA -->
-<section id="pilka" class="fade card football">
+        <div class="card">
+            <h2>🤝 Relacje</h2>
+            <p><b>Najlepszy przyjaciel:</b> Kacper Żurowski</p>
+        </div>
 
-<h2>⚽ Piłka nożna</h2>
+    </section>
 
-<p><b>Klub:</b> Pogoń Świerzawa</p>
-<p><b>Wróg:</b> Orzeł Wojcieszów</p>
-<p><b>Trener:</b> Daniel Czapiewski</p>
+    <section id="pilka" class="card football">
+        <h2>⚽ Piłka nożna</h2>
 
-<p><b>Ulubione zagranie:</b> mur przy wolnych z Kacprem Żurowskim</p>
-<p><b>Ulubiony klub:</b> Budowlani Wojcieszów</p>
+        <div class="grid-2 info">
+            <div>
+                <p><b>Klub:</b> Pogoń Świerzawa</p>
+                <p><b>Największy wróg:</b> Orzeł Wojcieszów</p>
+                <p><b>Boiskowi przyjaciele:</b> Kacper Żurowski, Bartek Warzocha</p>
+                <p><b>Trener:</b> Daniel Czapiewski</p>
+            </div>
+            <div>
+                <p><b>Ulubione zajęcie na boisku:</b> Robienie muru wraz z Kacprem Żurowskim przy rzutach wolnych</p>
+                <p><b>Ulubiony klub piłkarski:</b> Budowlani Wojcieszów</p>
+                <p><b>Co lubię najbardziej:</b> Derby z Orłem Wojcieszów i dopingowanie Pogoni</p>
+                <p><b>Dodatek:</b> Jestem piłkarzem pożądanym przez wszystkie kluby</p>
+            </div>
+        </div>
 
-<p>Uwielbiam derby i doping Pogoni.</p>
-<p>Na boisku jestem zawodnikiem znanym w regionie.</p>
+        <div class="mini-pill-row">
+            <span class="mini-pill">Duma z Pogoni</span>
+            <span class="mini-pill">Emocje derbowe</span>
+            <span class="mini-pill">Mur przy wolnych</span>
+            <span class="mini-pill">Boiskowy charakter</span>
+        </div>
 
-</section>
+        <h3>O klubie</h3>
+        <p>
+            Pogoń Świerzawa to lokalny klub piłkarski, który daje dużo emocji, rywalizacji i prawdziwego sportowego klimatu.
+            To miejsce, z którym mocno się utożsamiam i które zawsze wspieram z trybun.
+        </p>
+    </section>
 
-<!-- KOŚCIÓŁ -->
-<section id="kosciol" class="fade card church">
+    <section id="kosciol" class="card church">
+        <h2>⛪ Kościół / Ministrantura</h2>
 
-<h2>⛪ Kościół / Ministrant</h2>
+        <div class="grid-2 info">
+            <div>
+                <p><b>Ksiądz:</b> Piotrek</p>
+                <p><b>Najlepsi przyjaciele ministranci:</b> Kacper Żurowski, Antonio</p>
+                <p><b>Chodzę do kościoła:</b> wyłącznie w niedziele i dni obowiązkowe</p>
+            </div>
+            <div>
+                <p><b>Grzechy:</b> Na co dzień brak, na wyjazdach ministranckich zdarzają się różne przygody</p>
+                <p><b>Wyjazdy ministranckie:</b> Wenecja, Mediolan, Gdańsk</p>
+                <p><b>Ulubione w kościele:</b> kadzidło — robi klimat 🔥</p>
+            </div>
+        </div>
 
-<p><b>Ksiądz:</b> Piotrek</p>
-<p><b>Przyjaciele:</b> Kacper Żurowski, Antonio</p>
+        <div class="mini-pill-row">
+            <span class="mini-pill">Służba przy ołtarzu</span>
+            <span class="mini-pill">Niedziela i święta</span>
+            <span class="mini-pill">Kadzidło</span>
+            <span class="mini-pill">Wyjazdy ministranckie</span>
+        </div>
 
-<p><b>Obecność:</b> niedziele i święta</p>
+        <h3>Moja droga</h3>
+        <p>
+            Ministrantura to ważna część mojego życia. Dzięki niej mam fajne wspomnienia, ludzi dookoła i wyjazdy,
+            które zostają w pamięci na długo.
+        </p>
+    </section>
 
-<p><b>Wyjazdy:</b> Wenecja, Mediolan, Gdańsk</p>
+    <section id="sociale" class="card">
+        <h2>📱 Social Media</h2>
+        <p>👉 TikTok: <a href="https://www.tiktok.com/@monszyn_" target="_blank">TikTok</a></p>
+        <p>👉 YouTube: <a href="https://www.youtube.com/@monszyn" target="_blank">YouTube</a></p>
+        <p>👉 Facebook: <a href="https://www.facebook.com/groups/359985621875587?locale=pl_PL" target="_blank">Facebook</a></p>
+    </section>
 
-<p><b>Ulubione:</b> kadzidło 🔥 (serio klimat robi robotę)</p>
-
-<p>Służba przy ołtarzu i wyjazdy to ważna część mojego życia.</p>
-
-</section>
-
-<!-- SOCIAL -->
-<section id="social" class="fade card">
-
-<h2>📱 Social Media</h2>
-
-<p>👉 TikTok: <a href="https://www.tiktok.com/@monszyn_" target="_blank">klik</a></p>
-<p>👉 YouTube: <a href="https://www.youtube.com/@monszyn" target="_blank">klik</a></p>
-<p>👉 Facebook: <a href="https://www.facebook.com/groups/359985621875587?locale=pl_PL" target="_blank">klik</a></p>
-
-<hr>
-
-<h3>🍔 Lifestyle</h3>
-<p><b>Uwielbiam:</b> siłownię, piłkę i dobrą formę</p>
-<p><b>Nienawidzę:</b> karty <b>Miner</b> z Clash Royale ❌</p>
-<p><b>Reakcja:</b> blokuję każdego kto mi ją wyśle 💀</p>
-
-</section>
+    <section id="motywacja" class="card">
+        <h2>🎥 Motywacja</h2>
+        <iframe src="https://www.youtube.com/watch?v=L0jIPHnM47c" allowfullscreen></iframe>
+    </section>
 
 </div>
 
 <footer>
-    <p>Monszyn © 2026</p>
+    <p>Strona Monszyn © 2026</p>
 </footer>
-
-<script>
-// animacje scroll
-const elements = document.querySelectorAll('.fade');
-
-const obs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting){
-            entry.target.classList.add('show');
-        }
-    });
-});
-
-elements.forEach(el => obs.observe(el));
-</script>
 
 </body>
 </html>
